@@ -15,7 +15,7 @@ class CreateHorseRacesTable extends Migration
     {
         Schema::create('horse_races', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->boolean('is_finished');
+            $table->boolean('is_finished')->default(false);
             $table->timestamps();
         });
     }
