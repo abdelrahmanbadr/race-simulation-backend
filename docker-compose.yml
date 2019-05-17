@@ -1,0 +1,53 @@
+version: "3.5"
+services:
+  #PHP Service
+  innogames_php72:
+    build:
+      context: docker/images/php72
+      dockerfile: Dockerfile
+    container_name: innogames_php72
+    tty: true
+    restart: unless-stopped
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www
+    volumes:
+    - ./:/var/www
+    - ./docker/images/php72/config/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+    - innogames-network
+
+  #Nginx Service
+  innogames_nginx:
+    image: nginx:alpine
+    container_name: innogames_nginx
+    restart: unless-stopped
+    tty: true
+    ports:
+    - "8090:80"
+    #   - "443:443"
+    volumes:
+    - ./:/var/www
+    - ./docker/images/nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+    - innogames-network
+
+  #Mysql Service
+  #todo mount container storage
+  innogames_mysql:
+    image: mysql:5.7
+    container_name: innogames_mysql
+    networks:
+    - innogames-network
+    environment:
+    - MYSQL_DATABASE=races
+    - MYSQL_ROOT_PASSWORD=password
+    - MYSQL_USER=root
+    - MYSQL_PASSWORD=password
+    ports:
+    - "3306:3306"
+
+networks:
+  innogames-network:
+    driver: bridge
