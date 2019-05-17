@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Domain\Models;
-
+use Illuminate\Database\Eloquent\Model;
 /**
  * Class Horse
  * @package App\Domain\Models
  */
-class Horse
+class Horse extends Model
 {
     /**
      * @var float
