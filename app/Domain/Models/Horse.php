@@ -16,7 +16,7 @@ class Horse extends Model
     /**
      * @var float
      */
-    private $speedShortage;
+    private $speed_shortage;
 
     /**
      * @var float
@@ -41,7 +41,7 @@ class Horse extends Model
      */
     public function getSpeedShortage(): float
     {
-        return $this->speedShortage;
+        return $this->speed_shortage;
     }
 
     /**
@@ -49,7 +49,7 @@ class Horse extends Model
      */
     public function setSpeedShortage(float $speedShortage)
     {
-        $this->speedShortage = $speedShortage;
+        $this->speed_shortage = $speedShortage;
     }
 
     /**
