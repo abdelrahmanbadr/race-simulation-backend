@@ -4,7 +4,7 @@ namespace App\Domain\Entities;
 
 /**
  * Class Horse
- * @package App\Domain\Models
+ * @package App\Domain\Entities
  */
 class Horse
 {
