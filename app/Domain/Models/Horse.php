@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domain\Entities;
+namespace App\Domain\Models;
 
 /**
  * Class Horse
- * @package App\Domain\Entities
+ * @package App\Domain\Models
  */
 class Horse
 {
