@@ -17,6 +17,7 @@ class HorseRaceController extends Controller
     public function getBestResults()
     {
         $horseRepository = new EloquentHorseRepository(new Horse());
+        //@todo move this logic to a cron job
         $horses = $horseRepository->getEmptyTimeToFinishRecords();
         foreach ($horses as $horseItem) {
             $repository = new EloquentHorseRepository($horseItem);
