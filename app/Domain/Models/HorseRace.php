@@ -6,24 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class HorseRace extends Model
 {
-    /**
-     * @var bool
-     */
-    private $is_finished;
+
 
     /**
-     * @param bool $is_finished
+     * The attributes that are mass assignable.
+     *
+     * @var array
      */
-    public function setIsFinished(bool $is_finished)
-    {
-        $this->is_finished = $is_finished;
-    }
+    protected $fillable = [
+        'is_finished', 'advances',
+    ];
 
     /**
-     * @return bool
+     * Get the horses for the race.
      */
-    public function getIsFinished(): bool
+    public function horses()
     {
-        return $this->is_finished;
-    }
+        return $this->hasMany(Horse::class, "race_id");
+   }
+
 }

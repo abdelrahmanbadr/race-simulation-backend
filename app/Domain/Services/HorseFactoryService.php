@@ -2,8 +2,9 @@
 
 namespace App\Domain\Services;
 
-use App\Domain\Entities\Horse;
+use App\Domain\Models\Horse;
 use App\Domain\Constants\HorseRaceConstant;
+use App\Domain\Repositories\EloquentHorseRepository;
 
 /**
  * This class will be responsible for making object of Horse model with random stats
@@ -14,7 +15,11 @@ use App\Domain\Constants\HorseRaceConstant;
 class HorseFactoryService
 {
     /**
-     * Speed formula HORSE_BASE_SPEED + random speed stat
+     * @var EloquentHorseRepository
+     */
+    private $horseRepository;
+
+    /**
      * after $endurance value is passed from the race jockey slows the horse down by JOCKEY_SLOW_DOWN_EFFECT
      * but effect reduced by ($strength * 8/100)
      *
@@ -52,12 +57,14 @@ class HorseFactoryService
 
     /**
      * HorseFactoryService constructor.
-     * @param int $speed
-     * @param int $strength
-     * @param int $endurance
+     * @param EloquentHorseRepository $horseRepository
+     * @param int|null $speed
+     * @param int|null $strength
+     * @param int|null $endurance
      */
-    public function __construct(int $speed = null, int $strength = null, int $endurance = null)
+    public function __construct(EloquentHorseRepository $horseRepository,int $speed = null, int $strength = null, int $endurance = null)
     {
+        $this->horseRepository = $horseRepository;
         $this->speed = ($speed ?? $this->getRandomStat());
         $this->strength = $strength ?? $this->getRandomStat();
         $this->endurance = ($endurance ?? $this->getRandomStat());
@@ -65,18 +72,19 @@ class HorseFactoryService
     }
 
     /**
+     * @param int $raceId
      * @return Horse
      */
-    public function make(): Horse
+    public function make(int $raceId): Horse
     {
-        $horse = new Horse();
-        $horse->setSpeed($this->speed);
-        $horse->setSpeedShortage($this->speedShortage);
-        $horse->setStrength($this->strength);
-        $horse->setEndurance($this->endurance);
 
+        $this->horseRepository->setSpeed($this->speed);
+        $this->horseRepository->setSpeedShortage($this->speedShortage);
+        $this->horseRepository->setStrength($this->strength);
+        $this->horseRepository->setEndurance($this->endurance);
+        $this->horseRepository->setRaceId($raceId);
 
-        return $horse;
+        return $this->horseRepository->save();
     }
 
     /**

@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get("horse-races","HorseRaceController@getActiveRaces");
+Route::post("horse-races","HorseRaceController@createRace");
+Route::post("horse-races/advance","HorseRaceController@advanceActiveRaces");
+Route::get("horse-races/results","HorseRaceController@getBestResults");

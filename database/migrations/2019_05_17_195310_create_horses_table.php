@@ -19,9 +19,9 @@ class CreateHorsesTable extends Migration
             $table->float('strength');
             $table->float('endurance');
             $table->float('speed_shortage');
-            $table->float('time_to_finish')->index();
-            $table->unsignedBigInteger('horse_races_id');
-            $table->foreign('horse_races_id')->references('id')->on('horse_races');
+            $table->float('time_to_finish')->index()->nullable();
+            $table->unsignedBigInteger('race_id');
+            $table->foreign('race_id')->references('id')->on('horse_races');
             $table->timestamps();
         });
     }

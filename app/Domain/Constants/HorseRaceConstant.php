@@ -35,5 +35,10 @@ class HorseRaceConstant
      */
     public const MAX_CONCURRENT_RACES = 3;
 
+    /**
+     * seconds for each race advance
+     */
+    public const RACE_ADVANCED_SECONDS = 10;
+
 
 }
