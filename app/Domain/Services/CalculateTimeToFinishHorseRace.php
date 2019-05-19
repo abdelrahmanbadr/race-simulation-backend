@@ -24,7 +24,7 @@ class CalculateTimeToFinishHorseRace
         $endurance = $this->horseRepository->getEndurance() * 100;
         $timeWithBestSpeed = $endurance / $bestSpeed;
         $timeWithNormalSpeed = (HorseRaceConstant::RACE_DISTANCE - $endurance) / $normalSpeed;
-        return $timeWithBestSpeed + $timeWithNormalSpeed;
+        return number_format((float)$timeWithBestSpeed + $timeWithNormalSpeed, 2, '.', '');
     }
 
 }
