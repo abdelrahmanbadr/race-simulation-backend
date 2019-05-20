@@ -17,19 +17,17 @@ stop_all_containers:
 clear_images:
 	$(BIN_DOCKER) rmi -f `$(BIN_DOCKER) images -q`
 
-build:
-	$(BIN_DOCKER_COMPOSE) build
+up_background:
+	$(BIN_DOCKER_COMPOSE) up -d
 
 up:
 	$(BIN_DOCKER_COMPOSE) up
-hosts:
+
+host:
 	sh ./update-hosts.sh
 
 phpunit_test:
 	$(BIN_DOCKER_COMPOSE) exec $(CONTAINER_PHP72) ./vendor/bin/phpunit
-
-up_background:
-	$(BIN_DOCKER_COMPOSE)  up -d
 
 cp_env:
 	cp .env.example .env
@@ -53,7 +51,4 @@ mysql_migrate:
 encryption_key:
 	$(BIN_DOCKER_COMPOSE) exec $(CONTAINER_PHP72) php artisan key:generate
 
-
-init: cp_env build  hosts up_background php_composer_install permissions  mysql_migrate encryption_key
-
-
+init: cp_env host up_background php_composer_install permissions encryption_key  mysql_migrate

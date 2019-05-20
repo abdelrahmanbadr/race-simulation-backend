@@ -13,7 +13,9 @@ class EloquentHorseRepository extends BaseEloquentRepository
 
     public function getBestTimeEverHorse()
     {
-        return $this->entity->where('time_to_finish', '!=', null)->orderBy('time_to_finish')->first();
+        return $this->entity->whereHas("race", function ($q) {
+            $q->where("is_finished", 1);
+        })->where('time_to_finish', '!=', null)->orderBy('time_to_finish')->first();
     }
 
     public function getBestResultsWithinRace(int $raceId, int $recordsNumber)

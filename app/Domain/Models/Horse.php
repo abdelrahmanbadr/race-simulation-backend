@@ -17,4 +17,12 @@ class Horse extends Model
         'speed', 'strength','endurance','speed_shortage','time_to_finish','race_id',
     ];
 
+    /**
+     * Get the horses for the race.
+     */
+    public function race()
+    {
+        return $this->belongsTo(HorseRace::class);
+    }
+
 }

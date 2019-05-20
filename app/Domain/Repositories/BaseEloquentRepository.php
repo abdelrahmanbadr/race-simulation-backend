@@ -21,7 +21,6 @@ class BaseEloquentRepository implements RepositoryInterface
         $this->entity = $entityModel;
     }
 
-
     /**
      * @param array $attributes
      * @return Model
