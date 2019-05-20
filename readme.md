@@ -38,6 +38,8 @@ To get results of best horse ever stats and top 3 horses foreach race in the las
 - Transformers :  Used to transform the response to match the front-end need.
 
 #### These are the other available command you might need in the future
+- run containers with logs `make up`
+
 - stop all containers `make stop_all_containers`
 
 - remove all containers `make clear_containers`
